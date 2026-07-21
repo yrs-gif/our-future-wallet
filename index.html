@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="retro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ninero, SPA financiera para pareja preparada para Firebase Auth y Firestore.">
+    <title>Ninero</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;900&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <a class="skip-link" href="#appContent">Saltar al contenido</a>
+    <div class="app-shell">
+        <aside class="sidebar" aria-label="Navegacion principal">
+            <header class="brand">
+                <span class="brand-mark" aria-hidden="true">N</span>
+                <div>
+                    <p class="eyebrow">Pareja</p>
+                    <h1>Ninero</h1>
+                </div>
+            </header>
+
+            <div class="mascot-card" aria-hidden="true">
+                <span class="mascot-coin">
+                    <span class="mascot-eye eye-left"></span>
+                    <span class="mascot-eye eye-right"></span>
+                    <span class="mascot-blush blush-left"></span>
+                    <span class="mascot-blush blush-right"></span>
+                    <span class="mascot-smile"></span>
+                </span>
+                <span class="mascot-star star-a"></span>
+                <span class="mascot-star star-b"></span>
+            </div>
+
+            <nav class="nav-menu" aria-label="Vistas financieras">
+                <button class="nav-btn active" type="button" data-view="dashboard" aria-current="page">
+                    <span class="nav-icon" aria-hidden="true"><i data-lucide="layout-dashboard"></i></span>
+                    <span>Ninero</span>
+                </button>
+                <button class="nav-btn" type="button" data-view="profile-me">
+                    <span class="nav-icon anime-icon anime-icon-yachi" aria-hidden="true">
+                        <span class="anime-hair"></span>
+                        <span class="anime-face">
+                            <span class="anime-eye anime-eye-left"></span>
+                            <span class="anime-eye anime-eye-right"></span>
+                            <span class="anime-mouth"></span>
+                        </span>
+                    </span>
+                    <span>Mi Yachi</span>
+                </button>
+                <button class="nav-btn" type="button" data-view="profile-einar">
+                    <span class="nav-icon anime-icon anime-icon-ushi" aria-hidden="true">
+                        <span class="anime-hair"></span>
+                        <span class="anime-face">
+                            <span class="anime-eye anime-eye-left"></span>
+                            <span class="anime-eye anime-eye-right"></span>
+                            <span class="anime-mouth"></span>
+                        </span>
+                    </span>
+                    <span>Mi Ushi</span>
+                </button>
+            </nav>
+
+            <section class="theme-panel" aria-labelledby="theme-title">
+                <div>
+                    <p id="theme-title" class="eyebrow">Tema visual</p>
+                    <strong id="themeName">Retro terminal</strong>
+                </div>
+                <button class="theme-toggle" type="button" id="themeToggle" aria-label="Cambiar a tema kawaii" aria-pressed="false">
+                    <span class="toggle-track" aria-hidden="true">
+                        <span class="toggle-thumb"></span>
+                    </span>
+                </button>
+            </section>
+
+            <footer class="session-card">
+                <p class="eyebrow">Sesion activa</p>
+                <strong id="activeUserName">Mi Yachi</strong>
+                <span id="activeUserEmail">yachi@example.com</span>
+            </footer>
+        </aside>
+
+        <main class="main-content" id="appContent" tabindex="-1">
+            <header class="topbar" aria-label="Acciones rapidas">
+                <button class="primary-action" type="button" data-action="new-transaction">
+                    <i data-lucide="plus"></i>
+                    <span>Nueva transaccion</span>
+                </button>
+                <button class="icon-action" type="button" data-action="mock-export" aria-label="Exportar datos" title="Exportar datos">
+                    <i data-lucide="download"></i>
+                </button>
+                <form class="search-box" role="search">
+                    <label class="sr-only" for="globalSearch">Buscar movimientos</label>
+                    <i data-lucide="search" aria-hidden="true"></i>
+                    <input id="globalSearch" type="search" placeholder="Buscar" autocomplete="off">
+                    <button class="search-clear" type="button" id="clearSearch" aria-label="Limpiar busqueda" hidden>
+                        <i data-lucide="x"></i>
+                    </button>
+                </form>
+            </header>
+
+            <section class="view-section active" id="dashboard" data-view-panel aria-labelledby="dashboard-title">
+                <header class="view-header">
+                    <div>
+                        <p class="eyebrow">Dashboard compartido</p>
+                        <h2 id="dashboard-title">Ninero</h2>
+                    </div>
+                    <span class="status-chip"><i data-lucide="radio-tower"></i> Mock Firebase-ready</span>
+                </header>
+
+                <div class="metrics-grid">
+                    <article class="metric-card accent">
+                        <span class="metric-icon" aria-hidden="true"><i data-lucide="landmark"></i></span>
+                        <span class="metric-label">Balance conjunto</span>
+                        <strong data-summary="shared.balance">$0.00</strong>
+                        <small>Ingresos menos gastos</small>
+                    </article>
+                    <article class="metric-card">
+                        <span class="metric-icon" aria-hidden="true"><i data-lucide="trending-up"></i></span>
+                        <span class="metric-label">Ingresos</span>
+                        <strong data-summary="shared.income">$0.00</strong>
+                        <small>Mi Yachi + Mi Ushi</small>
+                    </article>
+                    <article class="metric-card">
+                        <span class="metric-icon" aria-hidden="true"><i data-lucide="receipt-text"></i></span>
+                        <span class="metric-label">Gastos</span>
+                        <strong data-summary="shared.expenses">$0.00</strong>
+                        <small>Hogar, gustos y metas</small>
+                    </article>
+                </div>
+
+                <div class="dashboard-grid">
+                    <article class="panel goal-panel">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <span class="panel-icon" aria-hidden="true"><i data-lucide="piggy-bank"></i></span>
+                                <div>
+                                    <p class="eyebrow">Meta compartida</p>
+                                    <h3>Fondo para viaje</h3>
+                                </div>
+                            </div>
+                            <span class="pill" data-goal-percent>0%</span>
+                        </div>
+                        <div class="progress-wrap" aria-label="Progreso de ahorro compartido">
+                            <span data-goal-progress></span>
+                        </div>
+                        <div class="goal-row">
+                            <span data-goal-saved>$0.00 ahorrados</span>
+                            <strong data-goal-target>$0.00 meta</strong>
+                        </div>
+                        <div class="goal-insights" aria-label="Detalle de la meta compartida">
+                            <div>
+                                <span>Restante</span>
+                                <strong data-goal-remaining>$0.00</strong>
+                            </div>
+                            <div>
+                                <span>Aporte sugerido</span>
+                                <strong data-goal-monthly>$0.00 / mes</strong>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="panel chart-panel">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <span class="panel-icon" aria-hidden="true"><i data-lucide="bar-chart-3"></i></span>
+                                <div>
+                                    <p class="eyebrow">Flujo mensual</p>
+                                    <h3>Ingresos vs gastos</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bar-chart" id="monthlyChart" aria-label="Grafico mensual de ingresos y gastos"></div>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <span class="panel-icon" aria-hidden="true"><i data-lucide="pie-chart"></i></span>
+                                <div>
+                                    <p class="eyebrow">Distribucion</p>
+                                    <h3>Gasto por categoria</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="donut-layout">
+                            <div class="donut-chart" id="categoryDonut" aria-label="Distribucion de gastos"></div>
+                            <ul class="breakdown-list" id="categoryBreakdown"></ul>
+                        </div>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <span class="panel-icon" aria-hidden="true"><i data-lucide="activity"></i></span>
+                                <div>
+                                    <p class="eyebrow">Tendencia</p>
+                                    <h3>Ahorro acumulado</h3>
+                                </div>
+                            </div>
+                            <span class="pill positive">+12%</span>
+                        </div>
+                        <div class="line-chart" id="savingTrend" aria-label="Tendencia de ahorro acumulado"></div>
+                    </article>
+                </div>
+
+                <article class="panel transaction-panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <span class="panel-icon" aria-hidden="true"><i data-lucide="list-checks"></i></span>
+                            <div>
+                                <p class="eyebrow">Global</p>
+                                <h3>Ultimos movimientos</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="transaction-list" id="globalTransactions"></ul>
+                </article>
+            </section>
+
+            <section class="view-section profile-view" id="profile-me" data-view-panel aria-labelledby="profile-me-title">
+                <img class="profile-watermark" src="assets/mi-yachi-cutout.png" alt="" aria-hidden="true" loading="lazy" decoding="async">
+                <header class="view-header">
+                    <div>
+                        <p class="eyebrow">Panel privado</p>
+                        <div class="profile-title">
+                            <span class="profile-avatar anime-icon anime-icon-yachi" aria-hidden="true">
+                                <span class="anime-hair"></span>
+                                <span class="anime-face">
+                                    <span class="anime-eye anime-eye-left"></span>
+                                    <span class="anime-eye anime-eye-right"></span>
+                                    <span class="anime-mouth"></span>
+                                </span>
+                            </span>
+                            <h2 id="profile-me-title">Mi Yachi</h2>
+                        </div>
+                    </div>
+                    <span class="status-chip"><i data-lucide="sparkles"></i> Cute budget mode</span>
+                </header>
+
+                <article class="profile-hero-card yachi-hero-card">
+                    <div class="profile-hero-copy">
+                        <div class="panel-title">
+                            <span class="panel-icon" aria-hidden="true"><i data-lucide="sparkles"></i></span>
+                            <div>
+                                <p class="eyebrow">Centro personal</p>
+                                <h3>Mi Yachi</h3>
+                            </div>
+                        </div>
+                        <div class="profile-focus-grid" data-profile-stats="yachi"></div>
+                        <div class="sparkline-row" id="yachiTrend" aria-label="Tendencia personal de Mi Yachi"></div>
+                    </div>
+                    <figure class="profile-art-card">
+                        <img src="assets/mi-yachi-cutout.png" alt="Ilustracion de Mi Yachi" loading="lazy" decoding="async">
+                    </figure>
+                </article>
+
+                <div class="profile-grid">
+                    <article class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <span class="panel-icon" aria-hidden="true"><i data-lucide="wallet"></i></span>
+                                <div>
+                                    <p class="eyebrow">Resumen</p>
+                                    <h3>Mi mes</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mini-metrics" data-profile-summary="yachi"></div>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <span class="panel-icon" aria-hidden="true"><i data-lucide="sliders-horizontal"></i></span>
+                                <div>
+                                    <p class="eyebrow">Presupuesto</p>
+                                    <h3>Distribucion individual</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="budget-list" id="yachiBudget"></div>
+                    </article>
+
+                    <article class="panel form-panel">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <span class="panel-icon" aria-hidden="true"><i data-lucide="file-plus-2"></i></span>
+                                <div>
+                                    <p class="eyebrow">Registro rapido</p>
+                                    <h3>Movimiento personal</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="transaction-form" data-transaction-form data-owner="yachi">
+                            <div class="segmented-field" aria-label="Tipo de movimiento">
+                                <input id="yachi-income" type="radio" name="type" value="income" checked>
+                                <label for="yachi-income"><i data-lucide="arrow-down-to-line"></i>Ingreso</label>
+                                <input id="yachi-expense" type="radio" name="type" value="expense">
+                                <label for="yachi-expense"><i data-lucide="arrow-up-from-line"></i>Gasto</label>
+                            </div>
+                            <label>Concepto<input type="text" name="description" placeholder="Ej. Nomina" autocomplete="off" maxlength="60" required></label>
+                            <div class="form-row">
+                                <label>Monto<input type="number" name="amount" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00" required></label>
+                                <label>Fecha<input type="date" name="createdAt"></label>
+                            </div>
+                            <label>Categoria<select name="category" data-category-select></select></label>
+                            <label>Nota<textarea name="note" rows="2" placeholder="Opcional"></textarea></label>
+                            <button class="primary-action full-width" type="submit"><i data-lucide="save"></i>Guardar</button>
+                        </form>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <span class="panel-icon" aria-hidden="true"><i data-lucide="history"></i></span>
+                                <div>
+                                    <p class="eyebrow">Reciente</p>
+                                    <h3>Movimientos de Mi Yachi</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="transaction-list compact-list" id="yachiTransactions"></ul>
+                    </article>
+                </div>
+            </section>
+
+            <section class="view-section profile-view" id="profile-einar" data-view-panel aria-labelledby="profile-einar-title">
+                <header class="view-header">
+                    <div>
+                        <p class="eyebrow">Panel independiente</p>
+                        <div class="profile-title">
+                            <span class="profile-avatar anime-icon anime-icon-ushi" aria-hidden="true">
+                                <span class="anime-hair"></span>
+                                <span class="anime-face">
+                                    <span class="anime-eye anime-eye-left"></span>
+                                    <span class="anime-eye anime-eye-right"></span>
+                                    <span class="anime-mouth"></span>
+                                </span>
+                            </span>
+                            <h2 id="profile-einar-title">Mi Ushi</h2>
+                        </div>
+                    </div>
+                    <span class="status-chip"><i data-lucide="bike"></i> Garage financiero</span>
+                </header>
+
+                <article class="profile-hero-card ushi-hero-card">
+                    <div class="profile-hero-copy">
+                        <div class="panel-title">
+                            <span class="panel-icon" aria-hidden="true"><i data-lucide="bike"></i></span>
+                            <div>
+                                <p class="eyebrow">Garage financiero</p>
+                                <h3>Mi Ushi</h3>
+                            </div>
+                        </div>
+                        <div class="profile-focus-grid" data-profile-stats="ushi"></div>
+                        <div class="sparkline-row ushi-sparkline" id="ushiTrend" aria-label="Tendencia personal de Mi Ushi"></div>
+                    </div>
+                    <div class="ushi-moto-stage" aria-label="Galeria visual de Mi Ushi">
+                        <figure class="moto-card moto-main">
+                            <img src="assets/moto3.jpeg" alt="Moto nocturna de Mi Ushi" loading="lazy" decoding="async">
+                        </figure>
+                        <figure class="moto-card moto-side">
+                            <img src="assets/moto2.jpeg" alt="Moto ilustrada de Mi Ushi" loading="lazy" decoding="async">
+                        </figure>
+                    </div>
+                </article>
+
+                <div class="profile-grid">
+                    <article class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <span class="panel-icon" aria-hidden="true"><i data-lucide="wallet"></i></span>
+                                <div>
+                                    <p class="eyebrow">Resumen</p>
+                                    <h3>Mi mes</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mini-metrics" data-profile-summary="ushi"></div>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <span class="panel-icon" aria-hidden="true"><i data-lucide="boxes"></i></span>
+                                <div>
+                                    <p class="eyebrow">Caja</p>
+                                    <h3>Resumen por categoria</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="budget-list" id="ushiBudget"></div>
+                    </article>
+
+                    <article class="panel form-panel">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <span class="panel-icon" aria-hidden="true"><i data-lucide="file-plus-2"></i></span>
+                                <div>
+                                    <p class="eyebrow">Registro rapido</p>
+                                    <h3>Movimiento de Mi Ushi</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="transaction-form" data-transaction-form data-owner="ushi">
+                            <div class="segmented-field" aria-label="Tipo de movimiento">
+                                <input id="ushi-income" type="radio" name="type" value="income" checked>
+                                <label for="ushi-income"><i data-lucide="arrow-down-to-line"></i>Ingreso</label>
+                                <input id="ushi-expense" type="radio" name="type" value="expense">
+                                <label for="ushi-expense"><i data-lucide="arrow-up-from-line"></i>Gasto</label>
+                            </div>
+                            <label>Concepto<input type="text" name="description" placeholder="Ej. Gasolina" autocomplete="off" maxlength="60" required></label>
+                            <div class="form-row">
+                                <label>Monto<input type="number" name="amount" min="0.01" step="0.01" inputmode="decimal" placeholder="0.00" required></label>
+                                <label>Fecha<input type="date" name="createdAt"></label>
+                            </div>
+                            <label>Categoria<select name="category" data-category-select></select></label>
+                            <label>Nota<textarea name="note" rows="2" placeholder="Opcional"></textarea></label>
+                            <button class="primary-action full-width" type="submit"><i data-lucide="save"></i>Guardar</button>
+                        </form>
+                    </article>
+
+                    <article class="panel">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <span class="panel-icon" aria-hidden="true"><i data-lucide="history"></i></span>
+                                <div>
+                                    <p class="eyebrow">Reciente</p>
+                                    <h3>Movimientos de Mi Ushi</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="transaction-list compact-list" id="ushiTransactions"></ul>
+                    </article>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <script src="script.js" defer></script>
+</body>
+</html>
