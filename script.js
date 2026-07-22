@@ -15,7 +15,7 @@ const state = {
             displayName: "Mi Yachi",
             email: "yachi@example.com",
             viewId: "profile-me",
-            trend: [32, 48, 44, 68, 58, 82, 74, 88, 79],
+            trend: [0, 0, 0, 0, 0, 0, 0, 0, 0],
             budget: [
                 { name: "Renta y servicios", limit: 0, spent: 0 },
                 { name: "Comida", limit: 0, spent: 0 },
@@ -27,7 +27,7 @@ const state = {
             displayName: "Mi Ushi",
             email: "ushi@example.com",
             viewId: "profile-einar",
-            trend: [44, 38, 58, 52, 76, 66, 88, 73, 91],
+            trend: [0, 0, 0, 0, 0, 0, 0, 0, 0],
             budget: [
                 { name: "Hogar compartido", limit: 0, spent: 0 },
                 { name: "Auto y transporte", limit: 0, spent: 0 },
