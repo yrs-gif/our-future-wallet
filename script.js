@@ -1,13 +1,13 @@
 const THEME_STORAGE_KEY = "ninero-theme";
-const TRANSACTIONS_STORAGE_KEY = "ninero-transactions";
+const TRANSACTIONS_STORAGE_KEY = "ninero-transactions-v2";
 
 const state = {
     currentUserId: "yachi",
     searchTerm: "",
     sharedGoal: {
         label: "Fondo para viaje",
-        saved: 34000,
-        target: 50000
+        saved: 0,
+        target: 0
     },
     profiles: {
         yachi: {
@@ -17,9 +17,9 @@ const state = {
             viewId: "profile-me",
             trend: [32, 48, 44, 68, 58, 82, 74, 88, 79],
             budget: [
-                { name: "Renta y servicios", limit: 9000, spent: 7200 },
-                { name: "Comida", limit: 5000, spent: 2700 },
-                { name: "Ahorro personal", limit: 7500, spent: 6000 }
+                { name: "Renta y servicios", limit: 0, spent: 0 },
+                { name: "Comida", limit: 0, spent: 0 },
+                { name: "Ahorro personal", limit: 0, spent: 0 }
             ]
         },
         ushi: {
@@ -29,29 +29,22 @@ const state = {
             viewId: "profile-einar",
             trend: [44, 38, 58, 52, 76, 66, 88, 73, 91],
             budget: [
-                { name: "Hogar compartido", limit: 8200, spent: 7200 },
-                { name: "Auto y transporte", limit: 4200, spent: 3400 },
-                { name: "Ahorro comun", limit: 6200, spent: 5000 }
+                { name: "Hogar compartido", limit: 0, spent: 0 },
+                { name: "Auto y transporte", limit: 0, spent: 0 },
+                { name: "Ahorro comun", limit: 0, spent: 0 }
             ]
         }
     },
     monthlyFlow: [
-        { month: "Ene", income: 58200, expense: 24800 },
-        { month: "Feb", income: 64100, expense: 26100 },
-        { month: "Mar", income: 60300, expense: 23900 },
-        { month: "Abr", income: 68400, expense: 25550 },
-        { month: "May", income: 65700, expense: 27100 },
-        { month: "Jun", income: 68400, expense: 25550 }
+        { month: "Ene", income: 0, expense: 0 },
+        { month: "Feb", income: 0, expense: 0 },
+        { month: "Mar", income: 0, expense: 0 },
+        { month: "Abr", income: 0, expense: 0 },
+        { month: "May", income: 0, expense: 0 },
+        { month: "Jun", income: 0, expense: 0 }
     ],
-    savingsTrend: [12000, 15800, 15100, 20400, 22600, 29200, 34000],
-    transactions: [
-        { id: "tx-001", ownerId: "yachi", type: "income", description: "Nomina Mi Yachi", category: "Ingreso", amount: 36900, createdAt: "2026-06-22", note: "" },
-        { id: "tx-002", ownerId: "ushi", type: "income", description: "Nomina Mi Ushi", category: "Ingreso", amount: 31500, createdAt: "2026-06-22", note: "" },
-        { id: "tx-003", ownerId: "yachi", type: "expense", description: "Super del hogar", category: "Comida", amount: 2450, createdAt: "2026-06-24", note: "" },
-        { id: "tx-004", ownerId: "ushi", type: "expense", description: "Gasolina", category: "Transporte", amount: 980, createdAt: "2026-06-25", note: "" },
-        { id: "tx-005", ownerId: "yachi", type: "expense", description: "Aportacion a viaje", category: "Ahorro", amount: 3000, createdAt: "2026-06-26", note: "" },
-        { id: "tx-006", ownerId: "ushi", type: "expense", description: "Herramientas", category: "Transporte", amount: 1650, createdAt: "2026-06-26", note: "" }
-    ]
+    savingsTrend: [0, 0, 0, 0, 0, 0, 0],
+    transactions: []
 };
 
 const categoryOptions = ["Ingreso", "Hogar", "Comida", "Transporte", "Ahorro", "Gustos", "Salud", "General"];
@@ -195,7 +188,7 @@ function initializeForms() {
             dateInput.value = new Date().toISOString().slice(0, 10);
             syncCategoryField(form);
             renderAll();
-            showToast("Movimiento guardado en el mock local");
+            showToast("Movimiento guardado");
         });
     });
 }
@@ -259,7 +252,7 @@ function initializeActions() {
 
         await deleteTransaction(deleteButton.dataset.deleteTransaction);
         renderAll();
-        showToast("Movimiento eliminado del mock local");
+        showToast("Movimiento eliminado");
     });
 }
 
@@ -295,7 +288,9 @@ function renderDashboardMetrics(data) {
 }
 
 function renderGoal() {
-    const percent = Math.min(Math.round((state.sharedGoal.saved / state.sharedGoal.target) * 100), 100);
+    const percent = state.sharedGoal.target > 0
+        ? Math.min(Math.round((state.sharedGoal.saved / state.sharedGoal.target) * 100), 100)
+        : 0;
     const remaining = Math.max(state.sharedGoal.target - state.sharedGoal.saved, 0);
     const monthlySuggestion = Math.ceil(remaining / 4);
 
@@ -309,7 +304,7 @@ function renderGoal() {
 
 function renderMonthlyChart() {
     const chart = document.getElementById("monthlyChart");
-    const maxValue = Math.max(...state.monthlyFlow.flatMap((item) => [item.income, item.expense]));
+    const maxValue = Math.max(...state.monthlyFlow.flatMap((item) => [item.income, item.expense]), 1);
 
     chart.innerHTML = state.monthlyFlow.map((item) => {
         const incomeHeight = Math.round((item.income / maxValue) * 100);
@@ -398,7 +393,9 @@ function renderProfiles() {
 function renderBudget(profile) {
     const list = document.getElementById(`${profile.id}Budget`);
     list.innerHTML = profile.budget.map((item) => {
-        const percent = Math.min(Math.round((item.spent / item.limit) * 100), 100);
+        const percent = item.limit > 0
+            ? Math.min(Math.round((item.spent / item.limit) * 100), 100)
+            : 0;
         return `
             <div class="budget-item">
                 <span>${escapeHtml(item.name)}</span>
