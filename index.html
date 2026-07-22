@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;900&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="estilos.css?v=20260722-2">
 </head>
 <body>
     <a class="skip-link" href="#appContent">Saltar al contenido</a>
@@ -250,10 +250,27 @@
                             </div>
                         </div>
                         <div class="profile-focus-grid" data-profile-stats="yachi"></div>
+                        <p class="zero-guidance" data-empty-state data-owner="yachi">
+                            <i data-lucide="sparkles" aria-hidden="true"></i>
+                            <span>Aun no hay transacciones este mes. Registra tu primer ahorro real para el Yaris con el boton de <strong>+ Nueva transaccion</strong>.</span>
+                        </p>
                         <div class="sparkline-row" id="yachiTrend" aria-label="Tendencia personal de Mi Yachi"></div>
                     </div>
                     <figure class="profile-art-card">
-                        <img src="assets/mi-yachi-cutout.png" alt="Ilustracion de Mi Yachi" width="768" height="1536" decoding="async">
+                        <div class="profile-zero-visual" data-empty-state data-owner="yachi">
+                            <span class="zero-visual-icon" aria-hidden="true"><i data-lucide="activity"></i></span>
+                            <div>
+                                <p class="eyebrow">Progreso mensual</p>
+                                <strong>Tu historia empieza en cero</strong>
+                            </div>
+                            <svg class="zero-line-chart" viewBox="0 0 420 180" role="img" aria-label="Grafico de progreso sin movimientos, linea plana en cero">
+                                <path class="zero-chart-grid" d="M18 30H402M18 78H402M18 126H402"></path>
+                                <path class="zero-chart-line" d="M18 145H402"></path>
+                                <circle class="zero-chart-point" cx="18" cy="145" r="5"></circle>
+                            </svg>
+                            <figcaption>Agrega un movimiento para comenzar a dibujar tu progreso.</figcaption>
+                        </div>
+                        <img data-populated-state data-owner="yachi" src="assets/mi-yachi-cutout.png" alt="Ilustracion de Mi Yachi" width="768" height="1536" decoding="async" hidden>
                     </figure>
                 </article>
 
@@ -282,6 +299,10 @@
                             </div>
                         </div>
                         <div class="budget-list" id="yachiBudget"></div>
+                        <div class="budget-empty" data-empty-state data-owner="yachi">
+                            <i data-lucide="folder-open" aria-hidden="true"></i>
+                            <p>Configura tus categorias de gasto para empezar a controlar tu distribucion.</p>
+                        </div>
                     </article>
 
                     <article class="panel form-panel">
@@ -393,6 +414,10 @@
                             </div>
                         </div>
                         <div class="budget-list" id="ushiBudget"></div>
+                        <div class="budget-empty" data-empty-state data-owner="ushi">
+                            <i data-lucide="folder-open" aria-hidden="true"></i>
+                            <p>Configura tus categorias de gasto para empezar a controlar tu distribucion.</p>
+                        </div>
                     </article>
 
                     <article class="panel form-panel">
@@ -442,6 +467,6 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script src="https://unpkg.com/lucide@latest" defer></script>
-    <script src="script.js" defer></script>
+    <script src="script.js?v=20260722-2" defer></script>
 </body>
 </html>

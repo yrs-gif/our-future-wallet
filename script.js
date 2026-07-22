@@ -387,6 +387,19 @@ function renderProfiles() {
 
         renderBudget(profile);
         renderSparkline(profile);
+        renderProfileState(profile.id);
+    });
+}
+
+function renderProfileState(profileId) {
+    const hasTransactions = state.transactions.some((transaction) => transaction.ownerId === profileId);
+
+    document.querySelectorAll(`[data-empty-state][data-owner="${profileId}"]`).forEach((element) => {
+        element.hidden = hasTransactions;
+    });
+
+    document.querySelectorAll(`[data-populated-state][data-owner="${profileId}"]`).forEach((element) => {
+        element.hidden = !hasTransactions;
     });
 }
 
@@ -443,7 +456,11 @@ function renderTransactionList(elementId, transactions) {
     const list = document.getElementById(elementId);
 
     if (!transactions.length) {
-        list.innerHTML = '<li class="transaction-item empty-state"><span class="transaction-icon"><i data-lucide="search-x"></i></span><div class="transaction-main"><strong>Sin resultados</strong><span>Ajusta tu busqueda</span></div></li>';
+        const isSearchEmpty = Boolean(state.searchTerm);
+        const icon = isSearchEmpty ? "search-x" : "wallet-cards";
+        const title = isSearchEmpty ? "Sin resultados" : "Aun no hay movimientos";
+        const detail = isSearchEmpty ? "Prueba con otra busqueda" : "Registra tu primera transaccion para comenzar";
+        list.innerHTML = `<li class="transaction-item empty-state"><span class="transaction-icon"><i data-lucide="${icon}"></i></span><div class="transaction-main"><strong>${title}</strong><span>${detail}</span></div></li>`;
         return;
     }
 
