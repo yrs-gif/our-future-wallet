@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;900&family=Quicksand:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="estilos.css?v=20260722-4">
+    <link rel="stylesheet" href="estilos.css?v=20260722-5">
 </head>
 <body>
     <a class="skip-link" href="#appContent">Saltar al contenido</a>
@@ -258,24 +258,11 @@
                     </div>
                     <figure class="profile-art-card">
                         <img class="profile-main-art" src="assets/mi-yachi-cutout.webp" alt="Ilustracion de Mi Yachi" width="260" height="520" decoding="async">
-                        <div class="profile-zero-visual" data-empty-state data-owner="yachi">
-                            <span class="zero-visual-icon" aria-hidden="true"><i data-lucide="activity"></i></span>
-                            <div>
-                                <p class="eyebrow">Resumen</p>
-                                <strong>Tu historia empieza en cero</strong>
-                            </div>
-                            <svg class="zero-line-chart" viewBox="0 0 420 180" role="img" aria-label="Grafico de progreso sin movimientos, linea plana en cero">
-                                <path class="zero-chart-grid" d="M18 30H402M18 78H402M18 126H402"></path>
-                                <path class="zero-chart-line" d="M18 145H402"></path>
-                                <circle class="zero-chart-point" cx="18" cy="145" r="5"></circle>
-                            </svg>
-                            <figcaption>Agrega un movimiento para comenzar a dibujar tu progreso.</figcaption>
-                        </div>
                     </figure>
                 </article>
 
                 <div class="profile-grid">
-                    <article class="panel">
+                    <article class="panel summary-panel">
                         <div class="panel-heading">
                             <div class="panel-title">
                                 <span class="panel-icon" aria-hidden="true"><i data-lucide="wallet"></i></span>
@@ -286,6 +273,18 @@
                             </div>
                         </div>
                         <div class="mini-metrics" data-profile-summary="yachi"></div>
+                        <div class="summary-zero-visual" data-empty-state data-owner="yachi">
+                            <span class="zero-visual-icon" aria-hidden="true"><i data-lucide="activity"></i></span>
+                            <div>
+                                <strong>Tu historia empieza en cero</strong>
+                                <p>Agrega un movimiento para comenzar a dibujar tu progreso.</p>
+                            </div>
+                            <svg class="zero-line-chart" viewBox="0 0 420 150" role="img" aria-label="Grafico de resumen sin movimientos, linea plana en cero">
+                                <path class="zero-chart-grid" d="M18 26H402M18 68H402M18 110H402"></path>
+                                <path class="zero-chart-line" d="M18 126H402"></path>
+                                <circle class="zero-chart-point" cx="18" cy="126" r="5"></circle>
+                            </svg>
+                        </div>
                     </article>
 
                     <article class="panel">

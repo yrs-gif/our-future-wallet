@@ -1416,32 +1416,28 @@ html[data-theme="kawaii"] .profile-watermark {
     filter: drop-shadow(0 20px 36px rgba(0, 0, 0, 0.28));
 }
 
-.profile-zero-visual {
-    position: absolute;
-    left: 22px;
-    bottom: 22px;
-    z-index: 2;
+.summary-zero-visual {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
-    align-content: center;
+    align-items: center;
     gap: 14px;
-    width: min(62%, 410px);
-    padding: 16px;
+    margin-top: 18px;
+    padding-top: 16px;
     color: var(--text-muted);
-    background:
-        linear-gradient(180deg, color-mix(in srgb, var(--accent) 6%, transparent), transparent 58%),
-        color-mix(in srgb, var(--bg-panel-strong) 94%, transparent);
-    border: 1px dashed color-mix(in srgb, var(--text-muted) 35%, var(--border));
-    border-radius: var(--radius-sm);
-    backdrop-filter: blur(8px);
+    border-top: 1px dashed color-mix(in srgb, var(--text-muted) 35%, var(--border));
 }
 
-.profile-zero-visual strong {
+.summary-zero-visual strong {
     display: block;
-    margin-top: 4px;
     color: var(--text-main);
     font-family: var(--font-display);
-    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-size: 1rem;
+}
+
+.summary-zero-visual p {
+    margin: 5px 0 0;
+    font-size: 0.78rem;
+    line-height: 1.45;
 }
 
 .zero-visual-icon {
@@ -1463,7 +1459,7 @@ html[data-theme="kawaii"] .profile-watermark {
 .zero-line-chart {
     grid-column: 1 / -1;
     width: 100%;
-    height: 76px;
+    height: 68px;
 }
 
 .zero-chart-grid {
@@ -1484,12 +1480,6 @@ html[data-theme="kawaii"] .profile-watermark {
     fill: var(--bg-panel-strong);
     stroke: color-mix(in srgb, var(--text-muted) 70%, transparent);
     stroke-width: 3;
-}
-
-.profile-zero-visual figcaption {
-    grid-column: 1 / -1;
-    text-align: center;
-    font-size: 0.8rem;
 }
 
 .budget-empty {
@@ -1820,17 +1810,7 @@ html[data-theme="kawaii"] .segmented-field input:checked + label {
         min-height: 340px;
     }
 
-    .profile-zero-visual {
-        grid-template-columns: auto minmax(0, 1fr);
-        left: 14px;
-        right: 14px;
-        bottom: 14px;
-        width: auto;
-        padding: 14px;
-    }
-
-    .zero-line-chart,
-    .profile-zero-visual figcaption {
+    .zero-line-chart {
         grid-column: 1 / -1;
     }
 
